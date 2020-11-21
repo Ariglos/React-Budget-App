@@ -1,23 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
-import { Wrapper } from 'components';
-import { Container, List } from './Navigation.css';
+import { Button } from "components";
+import { Container, NavigationWrapper, List } from "./Navigation.css";
 
-function Navigation( {items} ) {
-    return (
-        <Container>
-            <Wrapper>
-                <List>
-                    {items.map(item => (
-                        <li key={item.to} >
-                            <Link to={item.to}>{item.content}</Link>
-                        </li>
-                    ))}
-                </List>
-         </Wrapper>          
-        </Container>
-    )
+function Navigation({ items = [], RightElement }) {
+  return (
+    <Container>
+      <NavigationWrapper>
+        <List>
+          {items.map((item) => (
+            <li key={item.to}>
+              <Button variant="inline" to={item.to}>
+                {item.content}
+              </Button>
+            </li>
+          ))}
+        </List>
+        {RightElement}
+      </NavigationWrapper>
+    </Container>
+  );
 }
 
 export default Navigation;

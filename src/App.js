@@ -10,26 +10,45 @@ import GlobalStyles from './index.css';
 
 import theme from 'utils/theme';
 
-import { Navigation } from 'components'; 
+import { Navigation, Wrapper, LoadingIndicator, Button } from 'components'; 
 
 
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <GlobalStyles />
       <Router>
         <Navigation items={[
           { content: 'Homepage', to: '/' },
           { content: 'Budget', to: '/budget' }
-        ]}/>
-        <Switch>
-          <Route exact path="/">Homepage</Route>
-          <Route path="/budget">Budget page</Route>
-        </Switch>
+        ]}
+        RightElement={(
+          <div>
+            <Button variant='regular'>pl</Button>
+            <Button variant='regular'>en</Button>
+          </div>
+        )}
+        />
+        <Wrapper>
+          <Switch>
+            <Route exact path="/">Homepage</Route>
+            <Route path="/budget">Budget page</Route>
+          </Switch>
+        </Wrapper>
       </Router>
-    </ThemeProvider>
+    </div>
   );
 }
 
-export default App;
+function RootApp() {
+  return (
+    <ThemeProvider theme={theme}>
+      <React.Suspense fallback={LoadingIndicator}>
+        <App />
+      </React.Suspense>
+    </ThemeProvider>
+  )
+}
+
+export default RootApp;
